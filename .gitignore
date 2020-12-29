@@ -6,6 +6,7 @@
 .tfstate
 .backup
 target/
+out/
 secret/
 release.properties
 buildNumber.properties
