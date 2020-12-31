@@ -124,20 +124,25 @@
                     <archive>
                         <manifest>
                             <mainClass>digital.future.vote.backend.StarterWithSwagger</mainClass>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>dependency-jars/</classpathPrefix> <!-- only needed when building without JIB plugin -->
                         </manifest>
                     </archive>
                 </configuration>
             </plugin>
+
             <plugin>
                 <groupId>pl.project13.maven</groupId>
                 <artifactId>git-commit-id-plugin</artifactId>
                 <version>4.0.3</version>
             </plugin>
+
             <plugin>
                 <groupId>com.google.cloud.tools</groupId>
                 <artifactId>jib-maven-plugin</artifactId>
                 <version>2.7.0</version>
                 <configuration>
+                    <skip>true</skip> <!-- skip to use Docker build for now -->
                     <from>
                         <image>openjdk:15-slim</image>
                     </from>
@@ -164,6 +169,27 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <!-- Make the jar reference dependent JAR files, required in case of separate Dockerfile usage -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/dependency-jars/</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+
+
 <!--            <plugin>-->
 <!--                <groupId>org.openapitools</groupId>-->
 <!--                <artifactId>openapi-generator-maven-plugin</artifactId>-->

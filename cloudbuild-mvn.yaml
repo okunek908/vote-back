@@ -1,0 +1,4 @@
+# Use this cloudbuild when jib plugin configured to create docker image (or docker image not needed)
+steps:
+  - name: 'gcr.io/cloud-builders/mvn'
+    args: ['package']
