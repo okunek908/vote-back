@@ -1,6 +1,7 @@
 steps:
   - name: 'gcr.io/cloud-builders/mvn'
     args: ['package']
+    waitFor: ['-']
   - name: 'gcr.io/cloud-builders/docker'
     args:
       - 'build'
