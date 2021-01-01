@@ -158,15 +158,6 @@
                         </jvmFlags>
                     </container>
                 </configuration>
-                <executions>
-                    <execution>
-                        <id>build-docker-image</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>dockerBuild</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
 
             <!-- Make the jar reference dependent JAR files, required in case of separate Dockerfile usage -->
