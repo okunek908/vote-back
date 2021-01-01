@@ -1,9 +1,5 @@
+# CI steps for Google Cloud Build
 steps:
-  - name: 'gcr.io/cloud-builders/docker'
-    args:
-      - 'build'
-      - '--tag=gcr.io/$PROJECT_ID/vote-back'
-      - '.'
-    waitFor: ['-']
-    id: 'latest'
-images: ['gcr.io/$PROJECT_ID/vote-back']
+  - name: 'gcr.io/cloud-builders/mvn'
+    args: ['package', 'jib:dockerBuild']
+images: ['gcr.io/$PROJECT_ID/vote-backend']
