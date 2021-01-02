@@ -19,6 +19,7 @@
         <kotlin.code.style>official</kotlin.code.style>
         <javalin.version>3.12.0</javalin.version>
         <junit.version>[4.13.1,)</junit.version>
+        <target.image>unknown_image_name</target.image> <!-- default -->
     </properties>
 
     <dependencies>
@@ -146,7 +147,7 @@
                         <image>openjdk:15-slim</image>
                     </from>
                     <to>
-                        <image>${project.artifactId}:latest</image>
+                        <image>${target.image}gcr.io/${project.artifactId}:latest</image>
                         <!-- optional: create a tag based on the git commit id (via the git-commit-id plugin): -->
                         <tags>
                             <tag>jib-version</tag>
