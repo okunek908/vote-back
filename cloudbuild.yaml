@@ -4,5 +4,7 @@ steps:
     args:
     - 'package'
     - 'jib:build'
+    - '-ntp'
+    - '-B'
     - '-Dtarget.image=gcr.io/$PROJECT_ID/vote-backend:latest'
 #images: ['gcr.io/$PROJECT_ID/vote-backend'] # don't think it is needed when using JIB

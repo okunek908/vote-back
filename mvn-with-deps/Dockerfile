@@ -3,4 +3,4 @@
 FROM gcr.io/cloud-builders/mvn
 WORKDIR /tmp
 COPY pom.xml .
-RUN ["mvn", "-B", "dependency:go-offline", "compile", "clean"]
+RUN ["mvn", "-B", "-ntp", "dependency:go-offline", "package", "clean"]
