@@ -126,7 +126,6 @@
                         <manifest>
                             <mainClass>digital.future.vote.backend.StarterWithSwagger</mainClass>
                             <addClasspath>true</addClasspath>
-                            <classpathPrefix>dependency-jars/</classpathPrefix> <!-- only needed when building without JIB plugin -->
                         </manifest>
                     </archive>
                 </configuration>
@@ -147,11 +146,11 @@
                         <image>openjdk:15-slim</image>
                     </from>
                     <to>
-                        <image>${target.image}gcr.io/${project.artifactId}:latest</image>
+                        <image>${target.image}</image>
                         <!-- optional: create a tag based on the git commit id (via the git-commit-id plugin): -->
-                        <tags>
-                            <tag>jib-version</tag>
-                        </tags>
+<!--                        <tags>-->
+<!--                            <tag>jib-version</tag>-->
+<!--                        </tags>-->
                     </to>
                     <container>
                         <jvmFlags>
@@ -159,24 +158,6 @@
                         </jvmFlags>
                     </container>
                 </configuration>
-            </plugin>
-
-            <!-- Make the jar reference dependent JAR files, required in case of separate Dockerfile usage -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>copy-dependencies</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>copy-dependencies</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.build.directory}/dependency-jars/</outputDirectory>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
 
 
