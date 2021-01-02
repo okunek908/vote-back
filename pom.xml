@@ -19,7 +19,7 @@
         <kotlin.code.style>official</kotlin.code.style>
         <javalin.version>3.12.0</javalin.version>
         <junit.version>[4.13.1,)</junit.version>
-        <target.image>unknown_image_name</target.image> <!-- default -->
+        <target.image>[[[unknown_image_name]]]</target.image> <!-- default -->
     </properties>
 
     <dependencies>
