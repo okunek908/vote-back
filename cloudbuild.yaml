@@ -1,8 +1,8 @@
 # CI steps for Google Cloud Build
 steps:
-  - name: 'gcr.io/$PROJECT_ID/mvn-with-deps'
+  - name: 'gcr.io/$PROJECT_ID/mvn-with-deps:latest'
     args:
     - 'package'
     - 'jib:build'
-    - '-Dtarget.image=gcr.io/$PROJECT_ID/vote-backend'
-#images: ['gcr.io/$PROJECT_ID/vote-backend']
+    - '-Dtarget.image=gcr.io/$PROJECT_ID/vote-backend:latest'
+#images: ['gcr.io/$PROJECT_ID/vote-backend'] # don't think it is needed when using JIB
