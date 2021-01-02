@@ -1,5 +1,5 @@
 # CI steps for Google Cloud Build
 steps:
-  - name: 'gcr.io/cloud-builders/mvn'
+  - name: 'gcr.io/$PROJECT_ID/mvn-with-deps'
     args: ['package', 'jib:build']
 #images: ['gcr.io/$PROJECT_ID/vote-backend']
