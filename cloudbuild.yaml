@@ -1,10 +1,78 @@
 # CI steps for Google Cloud Build
+#
+# This script is intended for automatic execution by Cloud Build triggered by git push.
+# Manual Execution can also be invoked:
+# Use the below command to invoke the build manually. Note the substitutions for BRANCH_NAME and
+# REVISION_ID. These variables are normally populated when the build is executed via build triggers
+# but will be empty during manual execution. Dummy branch and revisions can be passed during manual
+# execution so the artifacts can be uploaded upon build completion.
+#
+# gcloud builds submit . \
+#   --config=cloudbuild.yaml \
+#   --substitutions=BRANCH_NAME="main",REVISION_ID="bd671f47ce9e95dce00d0c07aee08f46d65658e4"
+#
+
 steps:
-  - name: 'gcr.io/$PROJECT_ID/mvn-with-deps:latest'
+  ###########################################################
+  # Step 1: Retrieve the cached .m2 directory from GCS
+  ###########################################################
+  - name: 'gcr.io/cloud-builders/gsutil'
     args:
-    - 'package'
-    - 'jib:build'
-    - '-ntp'
-    - '-B'
-    - '-Dtarget.image=gcr.io/$PROJECT_ID/vote-backend:latest'
+      - '-m'
+      - 'rsync'
+      - '-r'
+      - 'gs://${_BUCKET}/cache/.m2'
+      - '/cache/.m2'
+    volumes:
+      - path: '/cache/.m2'
+        name: 'm2_cache'
+
+  ###########################################################
+  # Step 2: Build, Test, and Verify
+  ###########################################################
+  - name: 'gcr.io/cloud-builders/mvn'
+#  - name: 'gcr.io/$PROJECT_ID/mvn-with-deps:latest'
+    args:
+      - 'package'
+      - 'jib:build'
+      - '-ntp'
+      - '-B'
+      - '-Dtarget.image=gcr.io/$PROJECT_ID/vote-backend:latest'
+    volumes:
+      - path: '/cache/.m2'
+        name: 'm2_cache'
+    env:
+      - MAVEN_OPTS=-Dmaven.repo.local=/cache/.m2
+
+  ###########################################################
+  # Step 3: Update cached .m2 directory on GCS with any
+  #         additional dependencies downloaded during the
+  #         build.
+  ###########################################################
+  - name: 'gcr.io/cloud-builders/gsutil'
+    args:
+      - '-m'
+      - 'rsync'
+      - '-r'
+      - '/cache/.m2'
+      - 'gs://${_BUCKET}/cache/.m2/'
+    volumes:
+      - path: '/cache/.m2'
+        name: 'm2_cache'
+
+substitutions:
+  # Default values
+  _BUCKET: 'vote.the.future'
+
+#artifacts:
+#  # Upload the jars created during the build.
+#  objects:
+#    location: 'gs://${_BUCKET}/artifacts/$BRANCH_NAME/$REVISION_ID'
+#    paths: ['target/*.jar']
+
 #images: ['gcr.io/$PROJECT_ID/vote-backend'] # don't think it is needed when using JIB
+
+options:
+  # Use higher CPU machines so the caching and build steps are faster.
+  machineType: 'N1_HIGHCPU_32'
+

@@ -22,6 +22,18 @@
         <target.image>[[[unknown_image_name]]]</target.image> <!-- default -->
     </properties>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.jdbi</groupId>
+                <artifactId>jdbi3-bom</artifactId>
+                <type>pom</type>
+                <version>3.16.0</version>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <dependencies>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
@@ -65,7 +77,17 @@
             <version>3.38.0</version>
         </dependency>
 
-        <!-- TODO Consider removing -->
+        <!-- JBDI Persistence -->
+        <dependency>
+            <groupId>org.jdbi</groupId>
+            <artifactId>jdbi3-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jdbi</groupId>
+            <artifactId>jdbi3-kotlin</artifactId>
+        </dependency>
+
+        <!-- JSON ObjectMapper for serialization / Kotlin data object binding  -->
         <dependency>
             <groupId>com.fasterxml.jackson.module</groupId>
             <artifactId>jackson-module-kotlin</artifactId> <!-- only required if you use Kotlin -->
@@ -76,11 +98,11 @@
             <artifactId>jackson-databind</artifactId> <!-- only required if you use Java -->
             <version>2.10.1</version>
         </dependency>
-        <dependency>
-            <groupId>io.github.classgraph</groupId>
-            <artifactId>classgraph</artifactId> <!-- only required for annotated static handlers in Java -->
-            <version>4.8.34</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>io.github.classgraph</groupId>-->
+<!--            <artifactId>classgraph</artifactId> &lt;!&ndash; only required for annotated static handlers in Java &ndash;&gt;-->
+<!--            <version>4.8.34</version>-->
+<!--        </dependency>-->
 
         <!-- Unit testing -->
         <dependency>
@@ -124,7 +146,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>digital.future.vote.backend.StarterWithSwagger</mainClass>
+                            <mainClass>digital.future.vote.backend.JavalinStarterKt</mainClass>
                             <addClasspath>true</addClasspath>
                         </manifest>
                     </archive>
