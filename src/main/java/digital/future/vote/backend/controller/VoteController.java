@@ -1,4 +1,4 @@
-package digital.future.vote.backend.votes;
+package digital.future.vote.backend.controller;
 
 import digital.future.vote.backend.domain.Vote;
 import io.micronaut.http.annotation.Body;
