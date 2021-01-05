@@ -23,3 +23,14 @@ Build:
 2. Connect at URL: http://localhost:8080
 3. Connect Swagger at: http://localhost:8080/swagger-docs
 
+## Local Development Environment Configuration on MacOS
+
+1. Install SDKMAN (https://sdkman.io/): 
+   `curl -s "https://get.sdkman.io" | bash`
+   `source "$HOME/.sdkman/bin/sdkman-init.sh"`
+2. Install JAVA SE 15 SDK:
+   `sdk install java 15.0.1-open`
+3. Install Maven 3.6.3:
+   `sdk install maven`
+4. Install Micronaut CLI tools:
+   `sdk install micronaut`
