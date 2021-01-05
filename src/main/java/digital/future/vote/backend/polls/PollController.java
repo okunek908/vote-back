@@ -14,7 +14,7 @@ import static java.util.Collections.emptyList;
 @Controller("poll")
 public class PollController {
     @Get
-    List<Poll> getAllPolls() {
+    public List<Poll> getAllPolls() {
         return emptyList();
 //        return List.of(
 //            new Poll("Poll1", LocalDateTime.now(), LocalDateTime.now(), emptyList()),
@@ -23,21 +23,17 @@ public class PollController {
     }
 
     @Post
-    Poll createPoll(@Body Poll poll)  {
+    public Poll createPoll(@Body Poll poll)  {
         throw new NotImplementedException("");
     }
 
     @Get("/id/{id}")
-    Poll getPoll(@NotNull Long id) {
+    public Poll getPoll(@NotNull Long id) {
         return new Poll("Poll1", LocalDateTime.now(), LocalDateTime.now(), emptyList());
     }
 
-    Long updatePoll(@Body Poll poll) {
-        throw new NotImplementedException("");
-    }
-
     @Delete("/id/{id}")
-    Long deletePoll(Long id) {
+    public Long deletePoll(Long id) {
         throw new NotImplementedException("");
     }
 }
