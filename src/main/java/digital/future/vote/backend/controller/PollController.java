@@ -5,14 +5,8 @@ import digital.future.vote.backend.repo.PollRepository;
 import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.*;
 import lombok.NonNull;
-import org.apache.commons.lang3.NotImplementedException;
-
-import java.time.LocalDateTime;
-import java.util.List;
 import javax.inject.Inject;
-import javax.validation.constraints.NotNull;
 
-import static java.util.Collections.emptyList;
 
 @Controller("poll")
 public class PollController {
@@ -32,12 +26,12 @@ public class PollController {
     }
 
     @Get("/id/{id}")
-    public Poll getPoll(@NotNull Long id) {
+    public Poll getPoll(@NonNull Long id) {
         return pollRepository.findById(id).orElseThrow();
     }
 
-    @Delete("/id/{id}")
-    public void deletePoll(Long id) {
+    @Delete(value = "/id/{id}", consumes = MediaType.ALL)
+    public void deletePoll(@NonNull Long id) {
         pollRepository.deleteById(id);
     }
 }

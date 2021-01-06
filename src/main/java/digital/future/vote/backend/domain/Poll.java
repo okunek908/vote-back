@@ -1,17 +1,12 @@
 package digital.future.vote.backend.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
 import io.micronaut.data.annotation.*;
-import io.micronaut.data.jdbc.annotation.ColumnTransformer;
-import io.micronaut.data.jdbc.annotation.JoinTable;
 import io.micronaut.data.model.DataType;
 import lombok.*;
 
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @MappedEntity
