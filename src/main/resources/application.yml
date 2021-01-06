@@ -14,9 +14,9 @@ datasources:
     dialect: H2
 #    url: jdbc:postgresql://localhost:5432/predator?ssl=false
 #    driverClassName: org.postgresql.Driver
-#    username: vote_backend_user
-#    password: 12345678
-#    schema-generate: CREATE_DROP
+#    username: postgres
+#    password: okunek777
+#    dialect: POSTGRES
 
 
 #jpa:
@@ -48,7 +48,7 @@ flyway:
 
 # expose for debug and monitoring
 endpoints:
-  all.path: /admin
+  all.path: /m
   flyway:
     enabled: true
     sensitive: false

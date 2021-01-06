@@ -1,11 +1,14 @@
 package digital.future.vote.backend.domain;
 
-import lombok.Data;
+import lombok.*;
 
 import java.util.List;
 
 @Data
+@NoArgsConstructor(access = AccessLevel.PACKAGE)
+@AllArgsConstructor(access = AccessLevel.PACKAGE)
+@RequiredArgsConstructor(access = AccessLevel.PUBLIC)
 public class PollQuestion {
-    String question;
-    List<String> answerOptions;
+    @NonNull String question;
+    List<String> options;
 }
