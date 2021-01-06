@@ -11,19 +11,66 @@ datasources:
     driverClassName: org.h2.Driver
     username: sa
     password: ''
+    dialect: H2
 #    url: jdbc:postgresql://localhost:5432/predator?ssl=false
 #    driverClassName: org.postgresql.Driver
 #    username: vote_backend_user
 #    password: 12345678
 #    schema-generate: CREATE_DROP
-#    dialect: H2
 
-jpa:
-  default:
-    entity-scan:
-      packages: 'digital.future.vote.backend.domain'
-    properties:
-      hibernate:
-        hbm2ddl:
-          auto: update
-        show_sql: true
+
+#jpa:
+#  default:
+#    entity-scan:
+#      packages: 'digital.future.vote.backend.domain'
+#    properties:
+#      hibernate:
+#        hbm2ddl:
+#          auto: none
+#        show_sql: true
+#jpa:
+#  default:
+#    packages-to-scan:
+#      - 'digital.future.vote.back'
+#    properties:
+#      hibernate:
+#        bytecode:
+#          provider: none
+
+
+
+
+flyway:
+  datasources:
+    default:
+      enabled: true
+      locations: classpath:db/migration
+
+# expose for debug and monitoring
+endpoints:
+  all.path: /admin
+  flyway:
+    enabled: true
+    sensitive: false
+  beans:
+    enabled: true
+    sensitive: false
+  info:
+    enabled: true
+    sensitive: false
+
+#
+#security:
+#  enabled: true
+#  endpoints:
+#    login:
+#      enabled: true
+#    oauth:
+#      enabled: true
+#  token:
+#    jwt:
+#      enabled: true
+#      signatures:
+#        secret:
+#          generator:
+#            secret: "${JWT_GENERATOR_SIGNATURE_SECRET:pleaseChangeThisSecretForANewOne}"

@@ -1,24 +1,25 @@
 package digital.future.vote.backend.controller;
 
 import digital.future.vote.backend.domain.Poll;
+import digital.future.vote.backend.repo.PollRepository;
 import io.micronaut.http.annotation.*;
 import org.apache.commons.lang3.NotImplementedException;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
 
 import static java.util.Collections.emptyList;
 
 @Controller("poll")
 public class PollController {
+    @Inject
+    PollRepository pollRepository;
+
     @Get
-    public List<Poll> getAllPolls() {
-        return emptyList();
-//        return List.of(
-//            new Poll("Poll1", LocalDateTime.now(), LocalDateTime.now(), emptyList()),
-//            new Poll("Poll2", LocalDateTime.now(), LocalDateTime.now(), emptyList())
-//        );
+    public Iterable<Poll> getAllPolls() {
+        return pollRepository.findAll();
     }
 
     @Post
@@ -28,7 +29,7 @@ public class PollController {
 
     @Get("/id/{id}")
     public Poll getPoll(@NotNull Long id) {
-        return new Poll("Poll1", LocalDateTime.now(), LocalDateTime.now(), emptyList());
+        return new Poll("Title", LocalDateTime.now(), LocalDateTime.now());
     }
 
     @Delete("/id/{id}")

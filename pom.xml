@@ -5,18 +5,25 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>digital.future.vote</groupId>
-    <artifactId>vote-backend</artifactId>
+    <artifactId>vote-back</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>Vote Backend</name>
 
+    <!--    <parent>-->
+    <!--        <groupId>io.micronaut</groupId>-->
+    <!--        <artifactId>micronaut-parent</artifactId>-->
+    <!--        <version>2.2.2</version>-->
+    <!--    </parent>-->
+
     <properties>
-        <jdk.version>15</jdk.version>
+        <jdk.version>11</jdk.version>
         <maven.compiler.release>11</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <exec.mainClass>digital.future.vote.backend.VoteApplication</exec.mainClass>
         <micronaut.version>2.2.2</micronaut.version>
+        <micronaut-data.version>2.2.1</micronaut-data.version>
         <lombok.version>1.18.16</lombok.version>
         <junit.version>[4.13.1,)</junit.version>
         <target.image>[[[unknown_image_name]]]</target.image> <!-- default -->
@@ -31,13 +38,12 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <!--            <dependency>-->
-            <!--                <groupId>org.jdbi</groupId>-->
-            <!--                <artifactId>jdbi3-bom</artifactId>-->
-            <!--                <type>pom</type>-->
-            <!--                <version>3.16.0</version>-->
-            <!--                <scope>import</scope>-->
-            <!--            </dependency>-->
+            <dependency>
+                <groupId>io.micronaut.data</groupId>
+                <artifactId>micronaut-data-bom</artifactId>
+                <version>2.2.1</version>
+                <type>pom</type>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -45,27 +51,26 @@
         <dependency>
             <groupId>io.micronaut</groupId>
             <artifactId>micronaut-inject</artifactId>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>io.micronaut</groupId>
             <artifactId>micronaut-validation</artifactId>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>io.micronaut</groupId>
             <artifactId>micronaut-http-server-netty</artifactId>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>io.micronaut</groupId>
             <artifactId>micronaut-http-client</artifactId>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>io.micronaut</groupId>
             <artifactId>micronaut-runtime</artifactId>
-            <scope>compile</scope>
+        </dependency>
+        <dependency> <!-- Allows monitoring via /admin/<endpoint> -->
+            <groupId>io.micronaut</groupId>
+            <artifactId>micronaut-management</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
@@ -73,7 +78,11 @@
             <scope>runtime</scope>
         </dependency>
 
-        <!-- Hibernate support -->
+        <!-- ================== -->
+        <!--  DATABASE RELATED  -->
+        <!-- ================== -->
+
+        <!-- Hibernate support, not needed for JDBC-only -->
         <!--        <dependency>-->
         <!--            <groupId>io.micronaut.data</groupId>-->
         <!--            <artifactId>micronaut-data-hibernate-jpa</artifactId>-->
@@ -84,19 +93,39 @@
             <groupId>io.micronaut.data</groupId>
             <artifactId>micronaut-data-jdbc</artifactId>
         </dependency>
+        <!-- need? -->
+        <dependency>
+            <groupId>io.micronaut.data</groupId>
+            <artifactId>micronaut-data-model</artifactId>
+        </dependency>
+        <!-- need? -->
+        <dependency>
+            <groupId>io.micronaut.data</groupId>
+            <artifactId>micronaut-data-tx</artifactId>
+        </dependency>
 
+        <dependency>
+            <groupId>io.micronaut.data</groupId>
+            <artifactId>micronaut-data-runtime</artifactId>
+        </dependency>
         <!-- Data Source / Connection pool -->
         <dependency>
             <groupId>io.micronaut.sql</groupId>
-            <artifactId>micronaut-jdbc-tomcat</artifactId>
+            <artifactId>micronaut-jdbc-hikari</artifactId>
             <scope>runtime</scope>
         </dependency>
+        <!-- DB Migration Scripts Management -->
         <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>42.2.6</version>
-            <scope>runtime</scope>
+            <groupId>io.micronaut.flyway</groupId>
+            <artifactId>micronaut-flyway</artifactId>
         </dependency>
+        <!-- JDBC Drivers -->
+        <!--        <dependency>-->
+        <!--            <groupId>org.postgresql</groupId>-->
+        <!--            <artifactId>postgresql</artifactId>-->
+        <!--            <version>42.2.6</version>-->
+        <!--            <scope>runtime</scope>-->
+        <!--        </dependency>-->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
@@ -169,10 +198,16 @@
                             <artifactId>micronaut-validation</artifactId>
                             <version>${micronaut.version}</version>
                         </path>
+                        <path>
+                            <groupId>io.micronaut.data</groupId>
+                            <artifactId>micronaut-data-processor</artifactId>
+                            <version>${micronaut-data.version}</version>
+                        </path>
                     </annotationProcessorPaths>
                     <compilerArgs>
                         <arg>-Amicronaut.processing.group=digital.future.vote</arg>
-                        <arg>-Amicronaut.processing.module=vote-backend</arg>
+                        <arg>-Amicronaut.processing.module=vote-back</arg>
+                        <!--                        <arg>-Alombok.noArgsConstructor.extraPrivate=true</arg>&lt;!&ndash; not sure &ndash;&gt;-->
                     </compilerArgs>
                 </configuration>
             </plugin>
