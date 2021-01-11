@@ -62,7 +62,7 @@ steps:
 
 substitutions:
   # Default values
-  _BUCKET: 'vote.the.future'
+  _BUCKET: 'vote-300412.appspot.com'
 
 #artifacts:
 #  # Upload the jars created during the build.
