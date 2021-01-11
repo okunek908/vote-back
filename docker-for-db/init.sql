@@ -1,0 +1,4 @@
+-- Following Commented out as not required anymore
+--CREATE USER okunek;
+--CREATE DATABASE votedb;
+--GRANT ALL PRIVILEGES ON DATABASE votedb TO okunek;

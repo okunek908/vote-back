@@ -6,7 +6,7 @@ Voting back-end
 To build locally, make sure you have following software installed:
 * JavaSE SDK 15
 * Maven 3 
-* Docker (if you want to build image / run in the container)
+* Docker 
 
 Build:
 1. Git clone or download the source code
@@ -17,11 +17,11 @@ Build:
 ## Run Backend Locally
 You can run backend against Postgres or H2 database. Edit **application.yml** accordingly.
 
-1. Pull Postgresql DB image:
-   `docker pull postgres:13-alpine`
+1. Build Postgresql DB image in folder docker-for-db:
+   `docker build -t mypostgres .`
    
 2. Run Postgres in Docker:
-   `docker run -it -p5432:5432 -e POSTGRES_PASSWORD=okunek777 postgres:13-alpine`
+   `docker run -d -p5432:5432 mypostgres`
    
 3. Run application either from IDE (run VoteApplication class) or in Docker:
    `docker run -it -p8080:8080 vote-backend`

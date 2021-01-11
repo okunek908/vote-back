@@ -17,14 +17,19 @@ import java.util.List;
 public class PollDto {
     @NonNull String title;
     String description;
+
+    @NonNull
     @FutureOrPresent
     @JsonDeserialize(as = LocalDateTime.class)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern ="yyyy-MM-dd'T'HH:mm:ss")
-    @NonNull LocalDateTime timeStart;
+    LocalDateTime timeStart;
+
+    @NonNull
     @FutureOrPresent
     @JsonDeserialize(as = LocalDateTime.class)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern ="yyyy-MM-dd'T'HH:mm:ss")
-    @NonNull LocalDateTime timeEnd;
+    LocalDateTime timeEnd;
+
     @NonNull List<PollQuestion> questions;
 
     public void updateEntity(@NonNull Poll poll) {

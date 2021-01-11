@@ -44,6 +44,6 @@ public class Poll {
     @JsonFormat(pattern = "YYYY-MM-dd'T'HH:mm:ssZ")
     OffsetDateTime updated;
 
-    @TypeDef(type = DataType.STRING) //TODO Use type JSON or JSONB for Postgres
+    @TypeDef(type = DataType.JSON) //TODO Use type JSON or JSONB for Postgres
     List<PollQuestion> questions;
 }
