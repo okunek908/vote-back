@@ -62,7 +62,7 @@ steps:
 
 substitutions:
   # Default values
-  _BUCKET: 'vote-back-cache'
+  _BUCKET: 'vote-back'
 
 #artifacts:
 #  # Upload the jars created during the build.
