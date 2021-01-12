@@ -1,21 +1,55 @@
 # vote-back
-Voting back-end
+Voting back-end application.
+
+# Технологический Стек
+## Развертывание
+Для масштабируемости и удобства разработки рассматриваем 2 целевые платформы
+* **Docker** / **Kubernetes Cluster**
+* Serverless Cloud Platforms
+
+Основным способом развертывания будет Docker. В проде возможно Кубер. Желательно проектировать с оглядкой на возможный деплоймент в Клауд (AWS или GCP) для минимизации затрат на поддержку инфраструктуры.
+
+## API
+* **REST + Swagger / OpenAPI** - де-факто стандарт, берем
+* **GraphQL** - не нужен, тк нет сложных запросов
+
+## Фреймворки
+* **_Micronaut_** - похож на Spring, но легковеснее: прокси генерируются не в рантайме, а compile time - приложение стартует быстрее, магии меньше.
+  Есть интеграции со всеми технологиями которые нам могут пригодится. Берем.
+* **Spring Boot** - де-факто стандарт, много готовых интеграций - берем для более сложный кейзов, либо если микронавт разочарует.
+* **Javalin** - сверхлегкий / простой / сверхбыстрый, но нет DI, отбросил.
+* **Vert.x** - реактивный  (хорошая масштабируемость, но нам не особо надо)
+* **Lagom** (Akka based) - реактивный, actor based (круто, но тоже не особо надо)
+
+## База Данных
+* Классической реляцонки - достаточно. Берем **Postgresql** как наиболее надежную и широко используемую.
+* В NoSQL - пока не видно необходимости.
+
+# Local Dev Environment Configuration (MacOS)
+
+## Установить софт:
+1. SDKMAN (https://sdkman.io/):
+   `curl -s "https://get.sdkman.io" | bash`
+   `source "$HOME/.sdkman/bin/sdkman-init.sh"`
+2. JAVA SE 15 SDK:
+   `sdk install java 15.0.1-open`
+3. Maven 3.6.3:
+   `sdk install maven`
+4. Docker https://docs.docker.com/get-docker/
+
+5. (Optional) IntelliJ Idea либо другая IDE.
+   
+6. (Optional) Micronaut CLI tools:
+   `sdk install micronaut`
 
 ## Build steps
 
-To build locally, make sure you have following software installed:
-* JavaSE SDK 15
-* Maven 3 
-* Docker 
-
-Build:
-1. Git clone or download the source code
+1. Git clone (or download the source code from GitHub).
 2. Run `mvn clean install`
 3. Run `docker build -t vote-backend .`
 
-
 ## Run Backend Locally
-You can run backend against Postgres or H2 database. Edit **application.yml** accordingly.
+You can run backend against any Postgres database. Edit **application.yml** accordingly.
 
 1. Build Postgresql DB image in folder docker-for-db:
    `docker build -t mypostgres .`
@@ -27,16 +61,4 @@ You can run backend against Postgres or H2 database. Edit **application.yml** ac
    `docker run -it -p8080:8080 vote-backend`
       
 4. Connect at URL: http://localhost:8080
-5. ~~Connect Swagger at: http://localhost:8080/swagger-docs~~~ <<<FIXME
-
-## Local Development Environment Configuration on MacOS
-
-1. Install SDKMAN (https://sdkman.io/): 
-   `curl -s "https://get.sdkman.io" | bash`
-   `source "$HOME/.sdkman/bin/sdkman-init.sh"`
-2. Install JAVA SE 15 SDK:
-   `sdk install java 15.0.1-open`
-3. Install Maven 3.6.3:
-   `sdk install maven`
-4. Install Micronaut CLI tools:
-   `sdk install micronaut`
+5. ~~Connect Swagger at: http://localhost:8080/swagger-docs~~~ <<<пока не работает FIXME
