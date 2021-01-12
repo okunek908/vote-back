@@ -62,3 +62,17 @@ You can run backend against any Postgres database. Edit **application.yml** acco
       
 4. Connect at URL: http://localhost:8080
 5. ~~Connect Swagger at: http://localhost:8080/swagger-docs~~~ <<<пока не работает FIXME
+
+# Running on GCP
+
+**Please ask me to provide access**
+* Project 
+  * name: Vote
+  * project id: vote-301515
+  * organization: okunook.com 
+  * region: europe-west4
+* Cloud Build CI (view access required): https://console.cloud.google.com/cloud-build/builds?authuser=1&orgonly=true&project=vote-301515
+* Last built Docker image here (public): https://console.cloud.google.com/gcr/images/vote-301515/GLOBAL/vote-backend?project=vote-301515
+* To deploy to Cloud Run (editor acces required): https://console.cloud.google.com/run?authuser=0&orgonly=true&project=vote-301515
+
+
