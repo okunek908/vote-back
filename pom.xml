@@ -253,9 +253,13 @@
                     <container>
                         <jvmFlags>
                             <jvmFlag>-server</jvmFlag>
-                            <jvmFlag>-XX:MaxPermSize=128M</jvmFlag>
+                            <jvmFlag>-XX:MaxPermSize=64MB</jvmFlag>
                             <jvmFlag>-Xms128M</jvmFlag>
                             <jvmFlag>-Xmx128M</jvmFlag>
+                            <!-- These options help troubleshoot memory issues -->
+                            <jvmFlag>-XX:NativeMemoryTracking=summary</jvmFlag>
+                            <jvmFlag>-XX:+UnlockDiagnosticVMOptions</jvmFlag>
+                            <jvmFlag>-XX:+PrintNMTStatistics</jvmFlag>
                         </jvmFlags>
                     </container>
                 </configuration>
