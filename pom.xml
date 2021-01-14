@@ -254,7 +254,8 @@
                         <jvmFlags>
                             <jvmFlag>-server</jvmFlag>
                             <jvmFlag>-XX:MaxPermSize=128M</jvmFlag>
-                            <jvmFlag>-Xmx128M -Xms128M</jvmFlag>
+                            <jvmFlag>-Xms128M</jvmFlag>
+                            <jvmFlag>-Xmx128M</jvmFlag>
                         </jvmFlags>
                     </container>
                 </configuration>
