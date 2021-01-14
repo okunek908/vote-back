@@ -212,7 +212,6 @@
                     <compilerArgs>
                         <arg>-Amicronaut.processing.group=digital.future.vote</arg>
                         <arg>-Amicronaut.processing.module=vote-back</arg>
-                        <!--                        <arg>-Alombok.noArgsConstructor.extraPrivate=true</arg>&lt;!&ndash; not sure &ndash;&gt;-->
                     </compilerArgs>
                 </configuration>
             </plugin>
@@ -254,6 +253,8 @@
                     <container>
                         <jvmFlags>
                             <jvmFlag>-server</jvmFlag>
+                            <jvmFlag>-XX:MaxPermSize=128M</jvmFlag>
+                            <jvmFlag>-Xmx128M -Xms128M</jvmFlag>
                         </jvmFlags>
                     </container>
                 </configuration>
