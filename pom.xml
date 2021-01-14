@@ -130,10 +130,11 @@
             <version>42.2.6</version>
             <scope>runtime</scope>
         </dependency>
-        <dependency> <!-- todo: remove if unused for unit tests -->
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <scope>test</scope>
+        <dependency> <!-- for Google Cloud SQL -->
+            <groupId>com.google.cloud.sql</groupId>
+            <artifactId>postgres-socket-factory</artifactId>
+            <version>1.2.0</version>
+            <scope>runtime</scope>
         </dependency>
 
         <!-- Swagger -->

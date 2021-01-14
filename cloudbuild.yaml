@@ -31,7 +31,6 @@ steps:
   # Step 2: Build, Test, and Verify
   ###########################################################
   - name: 'gcr.io/cloud-builders/mvn'
-#  - name: 'gcr.io/$PROJECT_ID/mvn-with-deps:latest'
     args:
       - 'package'
       - 'jib:build'

@@ -74,3 +74,8 @@ endpoints:
 #        secret:
 #          generator:
 #            secret: "${JWT_GENERATOR_SIGNATURE_SECRET:pleaseChangeThisSecretForANewOne}"
+
+# alternative way to specify log level
+logger:
+  levels:
+    foo.bar: ERROR
