@@ -12,10 +12,10 @@
     <root level="info">
         <appender-ref ref="STDOUT" />
     </root>
-    <logger name="io.micronaut.context.condition" level="TRACE"/>
-    <logger name="io.micronaut.jackson" level="TRACE"/>
+    <logger name="io.micronaut.context.condition" level="DEBUG"/>
+    <logger name="io.micronaut.jackson" level="INFO"/>
     <!-- Netty -->
-    <logger name="io.micronaut.http" level="TRACE"/>
+    <logger name="io.micronaut.http" level="INFO"/>
     <!-- Trace routes to endpoints -->
     <logger name="io.micronaut.web" level="TRACE"/>
     <!-- Trace SQL queries -->

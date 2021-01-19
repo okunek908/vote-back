@@ -1,6 +1,15 @@
 micronaut:
   application:
     name: vote-backend
+  # expose Swagger OpenAPI
+  router:
+    static-resources:
+      swagger:
+        paths: classpath:META-INF/swagger
+        mapping: /swagger/**
+      swagger-ui:
+        paths: classpath:META-INF/swagger/views/swagger-ui
+        mapping: /swagger-ui/**
 
 jackson:
   bean-introspection-module: true
@@ -17,28 +26,6 @@ datasources:
     username: vote
     password: gJnUwvJ&EbeP
     dialect: POSTGRES
-
-
-#jpa:
-#  default:
-#    entity-scan:
-#      packages: 'digital.future.vote.backend.domain'
-#    properties:
-#      hibernate:
-#        hbm2ddl:
-#          auto: none
-#        show_sql: true
-#jpa:
-#  default:
-#    packages-to-scan:
-#      - 'digital.future.vote.back'
-#    properties:
-#      hibernate:
-#        bytecode:
-#          provider: none
-
-
-
 
 flyway:
   datasources:

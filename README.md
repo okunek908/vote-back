@@ -58,10 +58,14 @@ You can run backend against any Postgres database. Edit **application.yml** acco
    `docker run -d -p5432:5432 mypostgres`
    
 3. Run application either from IDE (run VoteApplication class) or in Docker:
-   `docker run -it -p8080:8080 vote-backend`
+   `docker run -it -p8080:8080 --net="host' vote-backend`
       
 4. Connect at URL: http://localhost:8080
-5. ~~Connect Swagger at: http://localhost:8080/swagger-docs~~~ <<<пока не работает FIXME
+   * To monitor health status: http://localhost:8080/m/health
+   * To get bean context info: http://localhost:8080/m/info
+   * To verify DB migration: http://localhost:8080/m/flyway
+   * Swagger: http://localhost:8080/swagger/Vote-1.0.yml
+
 
 # Running on GCP
 

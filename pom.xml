@@ -144,11 +144,18 @@
             <version>2.1.6</version>
         </dependency>
         <dependency>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-annotations</artifactId>
+            <version>2.1.6</version>
+        </dependency>
+        <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>swagger-ui</artifactId>
             <version>3.38.0</version>
         </dependency>
 
+
+        <!-- Avoid boilerplate code for DTO and VO with @Data and @Value annotations -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -185,6 +192,7 @@
                     <source>${jdk.version}</source>
                     <target>${jdk.version}</target>
                     <encoding>UTF-8</encoding>
+                    <fork>true</fork>
                     <!-- Uncomment to enable incremental compilation -->
                     <!-- <useIncrementalCompilation>false</useIncrementalCompilation> -->
                     <annotationProcessorPaths combine.children="append">
@@ -208,13 +216,20 @@
                             <artifactId>micronaut-data-processor</artifactId>
                             <version>${micronaut-data.version}</version>
                         </path>
+                        <path> <!-- for swagger annotations -->
+                            <groupId>io.micronaut.openapi</groupId>
+                            <artifactId>micronaut-openapi</artifactId>
+                            <version>${micronaut.version}</version>
+                        </path>
                     </annotationProcessorPaths>
                     <compilerArgs>
                         <arg>-Amicronaut.processing.group=digital.future.vote</arg>
                         <arg>-Amicronaut.processing.module=vote-back</arg>
+                        <arg>-J-Dmicronaut.openapi.views.spec=swagger-ui.enabled=true,swagger-ui.theme=flattop</arg>
                     </compilerArgs>
                 </configuration>
             </plugin>
+
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -253,7 +268,6 @@
                     <container>
                         <jvmFlags>
                             <jvmFlag>-server</jvmFlag>
-                            <jvmFlag>-XX:MaxPermSize=64MB</jvmFlag>
                             <jvmFlag>-Xms128M</jvmFlag>
                             <jvmFlag>-Xmx128M</jvmFlag>
                             <!-- These options help troubleshoot memory issues -->
