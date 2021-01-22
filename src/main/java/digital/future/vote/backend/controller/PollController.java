@@ -1,17 +1,17 @@
 package digital.future.vote.backend.controller;
 
 import digital.future.vote.backend.domain.Poll;
-import digital.future.vote.backend.repo.PollRepository;
+import digital.future.vote.backend.repo.PollRepo;
 import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.*;
 import lombok.NonNull;
 import javax.inject.Inject;
 
-
+//@Slf4j
 @Controller("poll")
 public class PollController {
     @Inject
-    PollRepository pollRepository;
+    PollRepo pollRepository;
 
     @Get
     public Iterable<Poll> getAllPolls() {

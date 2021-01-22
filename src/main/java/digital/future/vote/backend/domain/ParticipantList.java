@@ -1,9 +1,12 @@
 package digital.future.vote.backend.domain;
 
-import java.util.List;
+import lombok.Data;
+import lombok.NonNull;
+
 //TODO: pagination for participants
+@Data
 public class ParticipantList {
-    String listName;
+    @NonNull String listName;
     Long ListId;
     Iterable<Participant> participants;
 }

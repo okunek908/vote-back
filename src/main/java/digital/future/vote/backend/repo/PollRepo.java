@@ -7,5 +7,5 @@ import io.micronaut.data.repository.CrudRepository;
 
 
 @JdbcRepository(dialect = Dialect.POSTGRES)
-public interface PollRepository extends CrudRepository<Poll, Long> {
+public interface PollRepo extends CrudRepository<Poll, Long> {
 }

@@ -4,8 +4,7 @@ import lombok.Data;
 import lombok.NonNull;
 
 @Data
-public class Participant {
-    @NonNull String id;
-    String gender;
-    Integer bornYear;
+public class User {
+    @NonNull String userId;
+    @NonNull String authorizationCode;
 }
