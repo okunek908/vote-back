@@ -48,6 +48,14 @@
     </dependencyManagement>
 
     <dependencies>
+        <!-- Base58 Encoding -->
+        <dependency>
+            <groupId>com.google</groupId>
+            <artifactId>bitcoinj</artifactId>
+            <version>0.11.3</version>
+        </dependency>
+
+        <!-- Micronaut -->
         <dependency>
             <groupId>io.micronaut</groupId>
             <artifactId>micronaut-inject</artifactId>

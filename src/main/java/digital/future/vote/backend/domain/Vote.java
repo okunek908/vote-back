@@ -1,6 +1,7 @@
 package digital.future.vote.backend.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import digital.future.vote.backend.util.UID;
 import io.micronaut.data.annotation.DateCreated;
 import io.micronaut.data.annotation.Id;
 import io.micronaut.data.annotation.MappedEntity;
@@ -10,7 +11,6 @@ import lombok.*;
 
 import java.time.OffsetDateTime;
 import java.util.Map;
-import java.util.UUID;
 
 @Data
 @MappedEntity
@@ -19,7 +19,7 @@ import java.util.UUID;
 public class Vote {
     // Generated vote unique id that identifies this vote action
     @Id
-    @NonNull UUID voteUid = UUID.randomUUID();
+    @NonNull UID voteUid = new UID();
     // references the poll
     @NonNull Long pollId;
     // user that performs this voting action
@@ -34,5 +34,5 @@ public class Vote {
     // additional properties related to vote action sourcing
     Map<String, String> voteProperties;
     // previous vote in case the user has changed his mind and wants to update their decision
-    String previousVote;
+    UID previousVoteUid;
 }
