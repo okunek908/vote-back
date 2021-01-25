@@ -5,8 +5,8 @@ import io.micronaut.data.annotation.*;
 import io.micronaut.data.model.DataType;
 import lombok.*;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
 import java.util.List;
 
 @MappedEntity
@@ -37,13 +37,15 @@ public class Poll {
     @DateCreated
     @TypeDef(type = DataType.TIMESTAMP)
     @JsonFormat(pattern = "YYYY-MM-dd'T'HH:mm:ssZ")
-    OffsetDateTime created;
+    Instant created;
 
     @DateUpdated
     @TypeDef(type = DataType.TIMESTAMP)
     @JsonFormat(pattern = "YYYY-MM-dd'T'HH:mm:ssZ")
-    OffsetDateTime updated;
+    Instant updated;
 
     @TypeDef(type = DataType.JSON)
     List<PollQuestion> questions;
+
+    ParticipantListVersion participantListVersion;
 }

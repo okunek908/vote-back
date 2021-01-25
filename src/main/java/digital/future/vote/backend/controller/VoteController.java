@@ -16,7 +16,7 @@ public class VoteController {
 
     @Post
     public UID registerVote(@Body VoteDto dto, @JsonProperty("updateVote") String updateVote)
-            throws UID.UidFormatException {
+            throws UID.FormatException {
         Vote vote = new Vote();
         dto.updateEntity(vote);
         if (updateVote != null) {

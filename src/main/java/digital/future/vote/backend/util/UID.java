@@ -2,19 +2,19 @@ package digital.future.vote.backend.util;
 
 import com.google.bitcoin.core.AddressFormatException;
 import com.google.bitcoin.core.Base58;
+import lombok.Data;
 
+import javax.annotation.concurrent.Immutable;
 import java.security.SecureRandom;
 
-
+@Data
+@Immutable
 public class UID {
     static SecureRandom rnd = new SecureRandom();
-    static int UID_SIZE = 16; // bytes
-    public static class UidFormatException extends Exception {
-        UidFormatException(String message) {
+    static int UID_SIZE = 20; // bytes
+    public static class FormatException extends Exception {
+        FormatException(String message) {
             super(message);
-        }
-        UidFormatException(Throwable th) {
-            super(th);
         }
     }
 
@@ -26,17 +26,17 @@ public class UID {
     }
 
     // Validate that the string looks like UID (to avoid manual entering errors) and construct UID.
-    public UID(String fromString) throws UidFormatException {
+    public UID(String fromString) throws FormatException {
         try {
             byte[] decoded = Base58.decode(fromString);
             if (decoded.length != (UID_SIZE + 1))
-                throw new UidFormatException("Incorrect size: " + decoded.length);
-            if (validateCrc(decoded))
-                throw new UidFormatException("CRC");
+                throw new FormatException("Incorrect size: " + decoded.length);
+            if (!validateCrc(decoded))
+                throw new FormatException("CRC");
             uid = new byte[UID_SIZE];
             System.arraycopy(decoded, 0, uid, 0, UID_SIZE);
         } catch (AddressFormatException e) {
-            throw new UidFormatException(e);
+            throw new FormatException(e.getMessage());
         }
     }
 

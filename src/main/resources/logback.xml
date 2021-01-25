@@ -19,7 +19,7 @@
     <!-- Trace routes to endpoints -->
     <logger name="io.micronaut.web" level="TRACE"/>
     <!-- Trace SQL queries -->
-    <logger name="io.micronaut.data" level="TRACE"/>
+    <logger name="io.micronaut.data.query" level="TRACE"/>
     <!-- Trace beans reflection -->
     <logger name="io.micronaut.core" level="TRACE"/>
 
