@@ -22,7 +22,7 @@ public class VoteController {
         if (updateVote != null) {
             //TODO: check that user attempts to update their own vote
             //TODO: check that the vote to be updated was not yet updated
-            vote.setPreviousVoteUid(new UID(updateVote));
+            vote.setUpdatedVoteUid(new UID(updateVote));
         } else {
             //TODO: check that the user has not yet voted
         }

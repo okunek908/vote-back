@@ -1,11 +1,16 @@
 package digital.future.vote.backend.domain;
 
-import lombok.Data;
-import lombok.NonNull;
+import io.micronaut.data.annotation.Embeddable;
+import io.micronaut.data.annotation.TypeDef;
+import io.micronaut.data.model.DataType;
+import lombok.*;
 
-@Data
+
+@Value
+@Embeddable
+@TypeDef(type = DataType.STRING)
+@RequiredArgsConstructor(access = AccessLevel.PUBLIC)
 public class Participant {
-    @NonNull String id;
-    String gender;
-    Integer bornYear;
+    // Opaque random-like user id
+    @NonNull String voterId;
 }

@@ -9,13 +9,16 @@ import io.micronaut.data.annotation.TypeDef;
 import io.micronaut.data.model.DataType;
 import lombok.*;
 
+import java.time.Instant;
 import java.time.OffsetDateTime;
+import java.util.List;
 import java.util.Map;
 
 @Data
 @MappedEntity
-@NoArgsConstructor(access = AccessLevel.PUBLIC)
+@NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
+@RequiredArgsConstructor(access = AccessLevel.PUBLIC)
 public class Vote {
     // Generated vote unique id that identifies this vote action
     @Id
@@ -23,16 +26,20 @@ public class Vote {
     // references the poll
     @NonNull Long pollId;
     // user that performs this voting action
-    @NonNull User user;
+    @NonNull String voterId;
 
     @DateCreated
     @TypeDef(type = DataType.TIMESTAMP)
-    @JsonFormat(pattern = "YYYY-MM-dd'T'HH:mm:ssZ")
-    @NonNull OffsetDateTime timestamp;
-    // user selection
-    @NonNull Map<Long, String> answers;
-    // additional properties related to vote action sourcing
-    Map<String, String> voteProperties;
+    @NonNull Instant timestamp;
+
+    // The Vote itself
+    @TypeDef(type = DataType.JSON)
+    @NonNull List<QuestionAnswer> answers;
+
+    @TypeDef(type = DataType.JSON)
+    VotingFacts facts;
+
     // previous vote in case the user has changed his mind and wants to update their decision
-    UID previousVoteUid;
+    UID updatedVoteUid;
+
 }

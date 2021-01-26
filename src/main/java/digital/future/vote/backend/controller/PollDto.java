@@ -1,7 +1,6 @@
 package digital.future.vote.backend.controller;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import digital.future.vote.backend.domain.Poll;
 import digital.future.vote.backend.domain.PollQuestion;
 import lombok.Data;
@@ -9,7 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 import javax.validation.constraints.FutureOrPresent;
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.List;
 
 @Data
@@ -20,15 +19,13 @@ public class PollDto {
 
     @NonNull
     @FutureOrPresent
-    @JsonDeserialize(as = LocalDateTime.class)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern ="yyyy-MM-dd'T'HH:mm:ss")
-    LocalDateTime timeStart;
+    Instant timeStart;
 
     @NonNull
     @FutureOrPresent
-    @JsonDeserialize(as = LocalDateTime.class)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern ="yyyy-MM-dd'T'HH:mm:ss")
-    LocalDateTime timeEnd;
+    Instant timeEnd;
 
     @NonNull List<PollQuestion> questions;
 

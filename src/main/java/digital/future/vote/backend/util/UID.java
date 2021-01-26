@@ -2,23 +2,24 @@ package digital.future.vote.backend.util;
 
 import com.google.bitcoin.core.AddressFormatException;
 import com.google.bitcoin.core.Base58;
-import lombok.Data;
+import io.micronaut.data.annotation.TypeDef;
+import io.micronaut.data.model.DataType;
+import lombok.Value;
 
-import javax.annotation.concurrent.Immutable;
 import java.security.SecureRandom;
 
-@Data
-@Immutable
+@Value
+@TypeDef(type = DataType.STRING)
 public class UID {
     static SecureRandom rnd = new SecureRandom();
     static int UID_SIZE = 20; // bytes
-    public static class FormatException extends Exception {
+    public static class FormatException extends RuntimeException {
         FormatException(String message) {
             super(message);
         }
     }
 
-    private final byte[] uid;
+    byte[] uid;
 
     public UID(){
         uid = new byte[UID_SIZE];
