@@ -19,12 +19,10 @@ public class PollDto {
 
     @NonNull
     @FutureOrPresent
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern ="yyyy-MM-dd'T'HH:mm:ss")
     Instant timeStart;
 
     @NonNull
     @FutureOrPresent
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern ="yyyy-MM-dd'T'HH:mm:ss")
     Instant timeEnd;
 
     @NonNull List<PollQuestion> questions;

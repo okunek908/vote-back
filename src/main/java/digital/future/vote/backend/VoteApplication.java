@@ -1,11 +1,24 @@
 package digital.future.vote.backend;
 
+import com.fasterxml.jackson.core.JsonFactory;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import edu.umd.cs.findbugs.annotations.Nullable;
 import io.micronaut.context.ApplicationContext;
+import io.micronaut.context.annotation.BootstrapContextCompatible;
+import io.micronaut.context.annotation.Factory;
+import io.micronaut.context.annotation.Replaces;
+import io.micronaut.jackson.JacksonConfiguration;
+import io.micronaut.jackson.ObjectMapperFactory;
 import io.micronaut.runtime.Micronaut;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Contact;
 import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.info.License;
+
+import javax.inject.Singleton;
+import java.util.Optional;
 
 @OpenAPIDefinition(
         info = @Info(

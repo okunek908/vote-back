@@ -12,12 +12,18 @@ micronaut:
         mapping: /swagger-ui/**
 
   security:
-    basic-auth:
-      enabled: true
-    authentication: idtoken
-    oauth2:
-      clients:
-        google:
+    enabled: false
+    authentication: bearer
+    redirect:
+      forbidden: true
+
+
+#    basic-auth:
+#      enabled: true
+#    authentication: idtoken
+#    oauth2:
+#      clients:
+#        google:
 #          client-secret: <<your client secret>>
 #          client-id: <<your client id>>
 #          openid:
@@ -25,6 +31,9 @@ micronaut:
 
 jackson:
   bean-introspection-module: true
+  serialization:
+    # Configure Jackson to represent Instant as human readable dates rather than epoch second.nanosecond
+    write-dates-as-timestamps: false
 
 datasources:
   default:
@@ -59,4 +68,7 @@ endpoints:
 # alternative way to specify log level
 logger:
   levels:
-    foo.bar: ERROR
+    io:
+      micronaut:
+        security:
+          authentication: DEBUG

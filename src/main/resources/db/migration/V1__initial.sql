@@ -17,7 +17,8 @@ create table POLL
     CREATED     timestamp    not null,
     UPDATED     timestamp,
     QUESTIONS   jsonb,
-    PARTICIPANT_LIST jsonb
+    PARTICIPANT_LIST jsonb,
+    PUBLIC_UID  varchar(100)
 );
 
 

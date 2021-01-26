@@ -4,7 +4,8 @@ import lombok.*;
 
 import java.util.List;
 
-@Value
+@Data
+@NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 public class PollQuestion {
     @NonNull String question;
