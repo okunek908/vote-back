@@ -1,18 +1,15 @@
 package digital.future.vote.backend.util;
 
+import com.fasterxml.jackson.annotation.JsonValue;
 import com.google.bitcoin.core.AddressFormatException;
 import com.google.bitcoin.core.Base58;
-import io.micronaut.data.annotation.TypeDef;
-import io.micronaut.data.model.DataType;
-import lombok.Value;
 
 import java.security.SecureRandom;
+import java.util.Arrays;
 
-@Value
-@TypeDef(type = DataType.STRING)
 public class UID {
     static SecureRandom rnd = new SecureRandom();
-    static int UID_SIZE = 20; // bytes
+    static int DEFAULT_SIZE = 20; // bytes
     public static class FormatException extends RuntimeException {
         FormatException(String message) {
             super(message);
@@ -22,28 +19,36 @@ public class UID {
     byte[] uid;
 
     public UID(){
-        uid = new byte[UID_SIZE];
+        uid = new byte[getSizeBytes()];
         rnd.nextBytes(uid);
     }
 
     // Validate that the string looks like UID (to avoid manual entering errors) and construct UID.
-    public UID(String fromString) throws FormatException {
+    public UID(String fromString) {
+        // check prefix
+        if (!fromString.startsWith(getPrefix())){
+            throw new FormatException("Value " + fromString + " is not prefixed with " + getPrefix());
+        }
+        // drop prefix
+        String notPrefixed = fromString.substring(getPrefix().length());
         try {
-            byte[] decoded = Base58.decode(fromString);
-            if (decoded.length != (UID_SIZE + 1))
-                throw new FormatException("Incorrect size: " + decoded.length);
+            byte[] decoded = Base58.decode(notPrefixed);
+            if (decoded.length != (getSizeBytes() + 1))
+                throw new FormatException("Decoding " + fromString + ": expected " + (getSizeBytes() +1)
+                        + " but found " + decoded.length + " bytes");
             if (!validateCrc(decoded))
                 throw new FormatException("CRC");
-            uid = new byte[UID_SIZE];
-            System.arraycopy(decoded, 0, uid, 0, UID_SIZE);
+            uid = new byte[getSizeBytes()];
+            System.arraycopy(decoded, 0, uid, 0, getSizeBytes());
         } catch (AddressFormatException e) {
             throw new FormatException(e.getMessage());
         }
     }
 
     // Base58 encoded string consisting of random bytes + 1 crc byte (to avoid manual entering errors).
+    @JsonValue
     public String toString() {
-        return Base58.encode(appendCrc(uid));
+        return getPrefix() + Base58.encode(appendCrc(uid));
     }
 
 
@@ -64,5 +69,23 @@ public class UID {
             crc ^= b;
         }
         return crc == 0;
+    }
+
+    protected String getPrefix() {
+        return "";
+    }
+
+    protected int getSizeBytes() {
+        return DEFAULT_SIZE;
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.hashCode(uid);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return Arrays.equals(((UID)obj).uid, uid);
     }
 }

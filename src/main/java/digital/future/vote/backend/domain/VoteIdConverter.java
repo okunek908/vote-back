@@ -1,5 +1,6 @@
-package digital.future.vote.backend.util;
+package digital.future.vote.backend.domain;
 
+import digital.future.vote.backend.util.UID;
 import io.micronaut.context.annotation.Factory;
 import io.micronaut.core.convert.TypeConverter;
 
@@ -8,14 +9,14 @@ import java.util.Optional;
 
 // Converter that is invoked when loading from / saving to the database.
 @Factory
-public class UIDConverter {
+public class VoteIdConverter {
     @Singleton
-    TypeConverter<UID, String> uid2string() {
+    TypeConverter<VoteId, String> uid2string() {
         return (object, targetType, context) -> Optional.of(object.toString());
     }
 
     @Singleton
-    TypeConverter<String, UID> string2uid() {
-        return (object, targetType, context) -> Optional.of(new UID(object));
+    TypeConverter<String, VoteId> string2uid() {
+        return (object, targetType, context) -> Optional.of(new VoteId(object));
     }
 }

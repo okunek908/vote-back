@@ -2,6 +2,7 @@ package digital.future.vote.backend.controller;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import digital.future.vote.backend.domain.Vote;
+import digital.future.vote.backend.domain.VoteId;
 import digital.future.vote.backend.repo.VoteRepo;
 import digital.future.vote.backend.util.UID;
 import io.micronaut.http.annotation.*;
@@ -15,14 +16,14 @@ public class VoteController {
     VoteRepo voteRepo;
 
     @Post
-    public UID registerVote(@Body VoteDto dto, @JsonProperty("updateVote") String updateVote)
+    public UID registerVote(@Body VoteDto dto, @JsonProperty("updateVote") VoteId updateVote)
             throws UID.FormatException {
         Vote vote = new Vote();
         dto.updateEntity(vote);
         if (updateVote != null) {
             //TODO: check that user attempts to update their own vote
             //TODO: check that the vote to be updated was not yet updated
-            vote.setUpdatedVoteUid(new UID(updateVote));
+            vote.setUpdatedVoteUid(updateVote);
         } else {
             //TODO: check that the user has not yet voted
         }

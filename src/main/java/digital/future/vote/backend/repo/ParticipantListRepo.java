@@ -13,7 +13,7 @@ import io.micronaut.data.repository.CrudRepository;
 interface ParticipantListRepo extends CrudRepository<ParticipantList, Long> {
 
     @Query("SELECT pl.participants FROM particpant_list AS pl WHERE pl.id = :listId")
-    Iterable<Participant> listParticipants(Long listId);
+    Iterable<String> listParticipants(Long listId);
 
 //    //TODO
 //    void addParticipantsBulk(Long listId, String... participantIds);

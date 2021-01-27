@@ -1,8 +1,8 @@
 package digital.future.vote.backend.domain;
 
-import io.micronaut.data.annotation.GeneratedValue;
-import io.micronaut.data.annotation.Id;
-import io.micronaut.data.annotation.MappedEntity;
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import io.micronaut.data.annotation.*;
 import lombok.*;
 
 import java.util.List;

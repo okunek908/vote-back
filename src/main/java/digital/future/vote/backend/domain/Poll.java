@@ -1,10 +1,16 @@
 package digital.future.vote.backend.domain;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import digital.future.vote.backend.util.UID;
+import io.micronaut.context.annotation.Type;
+import io.micronaut.core.annotation.TypeHint;
 import io.micronaut.data.annotation.*;
+import io.micronaut.data.jdbc.annotation.ColumnTransformer;
 import io.micronaut.data.model.DataType;
 import lombok.*;
 
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.Instant;
 import java.util.List;
 
@@ -47,7 +53,6 @@ public class Poll {
     @TypeDef(type = DataType.JSON)
     ParticipantList participantList;
 
-    // UID that is to be used in Poll URL
     UID publicUid;
 
     @Transient
