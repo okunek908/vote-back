@@ -18,8 +18,8 @@
     <!--    </parent>-->
 
     <properties>
-        <jdk.version>11</jdk.version>
-        <maven.compiler.release>11</maven.compiler.release>
+        <jdk.version>15</jdk.version>
+        <maven.compiler.release>15</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <exec.mainClass>digital.future.vote.backend.VoteApplication</exec.mainClass>
         <micronaut.version>2.2.2</micronaut.version>
