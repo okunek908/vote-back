@@ -30,6 +30,14 @@ public class PollController {
         return pollRepository.findById(id).orElseThrow();
     }
 
+    @Put("/id/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Poll updatePoll(@NonNull Long id, @NonNull @Body PollDto dto)  {
+        Poll poll = pollRepository.findById(id).orElseThrow();
+        dto.updateEntity(poll);
+        return pollRepository.update(poll);
+    }
+
     @Delete(value = "/id/{id}", consumes = MediaType.ALL)
     public void deletePoll(@NonNull Long id) {
         pollRepository.deleteById(id);

@@ -1,7 +1,5 @@
 package digital.future.vote.backend.domain;
 
-import com.fasterxml.jackson.annotation.JsonUnwrapped;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.micronaut.data.annotation.*;
 import lombok.*;
 
