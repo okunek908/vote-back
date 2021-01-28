@@ -31,8 +31,6 @@ create table VOTE
     TIMESTAMP   timestamp    not null,
     ANSWERS     jsonb        not null,
     FACTS       jsonb,
-    CREATED     timestamp    not null,
-    UPDATED     timestamp,
     UPDATED_VOTE_UID varchar(100),
     constraint fk_vote foreign key (POLL_ID) references POLL(ID),
     constraint fk_updated_vote_uid foreign key (UPDATED_VOTE_UID) references VOTE(VOTE_UID)

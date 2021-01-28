@@ -1,9 +1,7 @@
 package digital.future.vote.backend.domain;
 
-import io.micronaut.data.annotation.DateCreated;
-import io.micronaut.data.annotation.Id;
-import io.micronaut.data.annotation.MappedEntity;
-import io.micronaut.data.annotation.TypeDef;
+import io.micronaut.core.annotation.Introspected;
+import io.micronaut.data.annotation.*;
 import io.micronaut.data.model.DataType;
 import lombok.*;
 
@@ -15,9 +13,11 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
 @RequiredArgsConstructor(access = AccessLevel.PUBLIC)
+@Introspected
 public class Vote {
     // Generated vote unique id that identifies this vote action
     @Id
+    @TypeDef(type = DataType.STRING)
     @NonNull VoteId voteUid = new VoteId();
     // references the poll
     @NonNull Long pollId;
@@ -26,7 +26,7 @@ public class Vote {
 
     @DateCreated
     @TypeDef(type = DataType.TIMESTAMP)
-    @NonNull Instant timestamp;
+    @NonNull Instant timestamp = Instant.now();
 
     // The Vote itself
     @TypeDef(type = DataType.JSON)

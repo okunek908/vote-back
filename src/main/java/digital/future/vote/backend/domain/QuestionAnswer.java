@@ -1,11 +1,10 @@
 package digital.future.vote.backend.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.NonNull;
-import lombok.Value;
+import lombok.*;
 
-@Value
+@Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class QuestionAnswer {
     @NonNull Integer question;
     @NonNull Integer answer;

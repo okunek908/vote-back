@@ -5,6 +5,7 @@ import digital.future.vote.backend.domain.Vote;
 import digital.future.vote.backend.domain.VoteId;
 import digital.future.vote.backend.repo.VoteRepo;
 import digital.future.vote.backend.util.UID;
+import edu.umd.cs.findbugs.annotations.Nullable;
 import io.micronaut.http.annotation.*;
 
 import javax.inject.Inject;
@@ -16,14 +17,15 @@ public class VoteController {
     VoteRepo voteRepo;
 
     @Post
-    public UID registerVote(@Body VoteDto dto, @JsonProperty("updateVote") VoteId updateVote)
+    public UID registerVote(@Body VoteDto dto, @JsonProperty("updateVote") @Nullable String updateVote)
             throws UID.FormatException {
         Vote vote = new Vote();
         dto.updateEntity(vote);
-        if (updateVote != null) {
+        vote.setVoterId("TODO!!!");//TODO
+        if (updateVote != null && !updateVote.isEmpty()) {
             //TODO: check that user attempts to update their own vote
             //TODO: check that the vote to be updated was not yet updated
-            vote.setUpdatedVoteUid(updateVote);
+            vote.setUpdatedVoteUid(new VoteId(updateVote));
         } else {
             //TODO: check that the user has not yet voted
         }
@@ -32,7 +34,7 @@ public class VoteController {
 
 
     @Get("uid/{uid}")
-    public Vote getVote(@NotNull UID uid) {
+    public Vote getVote(@NotNull VoteId uid) {
         //TODO: ensure this is current user's vote
         return voteRepo.findById(uid).orElseThrow();
     }
