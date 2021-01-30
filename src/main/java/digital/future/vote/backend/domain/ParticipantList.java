@@ -20,5 +20,6 @@ public class ParticipantList {
 
     String description;
 
-    List<Participant> participants;
+    /** Participants - list of voters in the form of opaque string user identifiers. */
+    List<String> participants;
 }

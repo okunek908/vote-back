@@ -1,6 +1,5 @@
 package digital.future.vote.backend.controller;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import digital.future.vote.backend.domain.ParticipantList;
 import digital.future.vote.backend.domain.Poll;
 import digital.future.vote.backend.domain.PollQuestion;
