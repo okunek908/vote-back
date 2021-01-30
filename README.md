@@ -64,7 +64,7 @@ You can run backend against any Postgres database. Edit **application.yml** acco
    * To monitor health status: http://localhost:8080/m/health
    * To get bean context info: http://localhost:8080/m/info
    * To verify DB migration: http://localhost:8080/m/flyway
-   * Swagger: http://localhost:8080/swagger/Vote-1.0.yml
+   * Swagger: http://localhost:8080/swagger/vote-1.0.yml
 
 
 # Running on GCP
