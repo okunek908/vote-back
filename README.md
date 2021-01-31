@@ -31,8 +31,8 @@ Voting back-end application.
 1. SDKMAN (https://sdkman.io/):
    `curl -s "https://get.sdkman.io" | bash`
    `source "$HOME/.sdkman/bin/sdkman-init.sh"`
-2. JAVA SE 15 SDK:
-   `sdk install java 15.0.1-open`
+2. JAVA SE 11 SDK:
+   `sdk install java 11.0.10.hs-adpt`
 3. Maven 3.6.3:
    `sdk install maven`
 4. Docker https://docs.docker.com/get-docker/
