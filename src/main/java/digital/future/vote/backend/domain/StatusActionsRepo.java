@@ -1,0 +1,27 @@
+package digital.future.vote.backend.domain;
+
+import com.google.common.collect.Lists;
+import lombok.Data;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Data
+public class StatusActionsRepo {
+
+    private List<StatusActions> statusActionsSet;
+
+    {
+        statusActionsSet = new ArrayList<>();
+        statusActionsSet.add(new StatusActions(Poll.Status.DRAFT, Lists.newArrayList(StatusActions.Action.DELETE, StatusActions.Action.EDIT)));
+        statusActionsSet.add(new StatusActions(Poll.Status.PUBLISHED, Lists.newArrayList(StatusActions.Action.DELETE, StatusActions.Action.EDIT)));
+        statusActionsSet.add(new StatusActions(Poll.Status.ACTIVE, Lists.newArrayList(StatusActions.Action.VIEW)));
+        statusActionsSet.add(new StatusActions(Poll.Status.ENDED, Lists.newArrayList(StatusActions.Action.VIEW)));
+    }
+
+    public List<StatusActions.Action> getActionsByStatus(String status) {
+        return statusActionsSet.stream().findFirst()
+                .filter(statusActions -> status.equals(statusActions.getStatus().name())).get().getActions();
+    }
+}
