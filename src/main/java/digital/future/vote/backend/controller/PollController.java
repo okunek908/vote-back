@@ -4,11 +4,14 @@ import digital.future.vote.backend.domain.Poll;
 import digital.future.vote.backend.repo.PollRepo;
 import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.*;
+import io.micronaut.security.annotation.Secured;
+import io.micronaut.security.rules.SecurityRule;
 import lombok.NonNull;
 import javax.inject.Inject;
 
 //@Slf4j
-@Controller("poll")
+@Secured(SecurityRule.IS_ANONYMOUS) //TODO
+@Controller("/poll")
 public class PollController {
     @Inject
     PollRepo pollRepository;

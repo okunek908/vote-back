@@ -4,11 +4,14 @@ import digital.future.vote.backend.domain.ParticipantList;
 import digital.future.vote.backend.repo.ParticipantListRepo;
 import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.*;
+import io.micronaut.security.annotation.Secured;
+import io.micronaut.security.rules.SecurityRule;
 import lombok.NonNull;
 
 import javax.inject.Inject;
 
 @Controller("/participants")
+@Secured(SecurityRule.IS_ANONYMOUS) //TODO
 public class ParticipantListController {
     @Inject
     ParticipantListRepo participantListRepo;

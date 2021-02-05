@@ -7,11 +7,15 @@ import digital.future.vote.backend.repo.VoteRepo;
 import digital.future.vote.backend.util.UID;
 import edu.umd.cs.findbugs.annotations.Nullable;
 import io.micronaut.http.annotation.*;
+import io.micronaut.security.annotation.Secured;
+import io.micronaut.security.rules.SecurityRule;
 
 import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
 
-@Controller("vote")
+
+@Controller("/vote")
+@Secured(SecurityRule.IS_ANONYMOUS) //TODO
 public class VoteController {
     @Inject
     VoteRepo voteRepo;

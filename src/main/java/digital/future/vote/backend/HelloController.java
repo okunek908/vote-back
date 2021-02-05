@@ -8,11 +8,16 @@ import io.micronaut.security.rules.SecurityRule;
 import java.security.Principal;
 
 // For testing purposes
-@Secured(SecurityRule.IS_AUTHENTICATED)
-@Controller("/hello")
+@Controller("/")
 public class HelloController {
-    @Get
+    @Get("/hello")
     public String getHome(Principal principal) {
         return "Hello, " + principal.getName();
+    }
+
+    @Get
+    @Secured(SecurityRule.IS_ANONYMOUS)
+    public String getRoot() {
+        return "Vote Backend";
     }
 }

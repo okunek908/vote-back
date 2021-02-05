@@ -5,3 +5,23 @@ datasources:
     username: votedb_user
     password: gJnUwvJ&EbeP
     dialect: POSTGRES
+
+micronaut:
+  security:
+    enabled: false
+    oauth2:
+      clients:
+        github:
+          client-id: def1b92bbc92db3cef16
+          client-secret: e6a883e53e3baf0cbb8bfc60c1d2a878e358847e
+          scopes:
+            - 'user:email'
+            - 'read:user'
+          authorization:
+            url: 'https://github.com/login/oauth/authorize'
+          token:
+            url: 'https://github.com/login/oauth/access_token'
+          auth-method: client-secret-post
+    endpoints:
+      logout:
+        get-allowed: true
