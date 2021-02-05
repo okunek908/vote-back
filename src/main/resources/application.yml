@@ -35,9 +35,9 @@ micronaut:
         github:
           client-id: e02a6af391ffc5a454da
           client-secret: d886b6e471ac63dfb1316eb884a759e4449c9025
-#          scopes:
-#            - 'user:email'
-#            - 'read:user'
+          scopes:
+            - 'user:email'
+            - 'read:user'
           authorization:
             url: 'https://github.com/login/oauth/authorize'
           token:
