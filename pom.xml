@@ -203,7 +203,7 @@
                     <source>${jdk.version}</source>
                     <target>${jdk.version}</target>
                     <encoding>UTF-8</encoding>
-<!--                    <fork>true</fork>-->
+                    <!--                    <fork>true</fork>-->
                     <!-- Uncomment to enable incremental compilation -->
                     <!-- <useIncrementalCompilation>false</useIncrementalCompilation> -->
                     <annotationProcessorPaths combine.children="append">
@@ -319,18 +319,40 @@
                 <version>3.0.0-M5</version> <!-- version 2.X.X doesnt run JUnit 5 tests! -->
                 <!-- Below deps seems not required for ver3, but required for 2.19,
                 for 2.20+ no test will found unless you permit illegal-access -->
-<!--                <dependencies>-->
-<!--                    <dependency>-->
-<!--                        <groupId>org.junit.platform</groupId>-->
-<!--                        <artifactId>junit-platform-surefire-provider</artifactId>-->
-<!--                        <version>1.1.0</version>-->
-<!--                    </dependency>-->
-<!--                    <dependency>-->
-<!--                        <groupId>org.junit.jupiter</groupId>-->
-<!--                        <artifactId>junit-jupiter-engine</artifactId>-->
-<!--                        <version>5.7.0</version>-->
-<!--                    </dependency>-->
-<!--                </dependencies>-->
+                <!--                <dependencies>-->
+                <!--                    <dependency>-->
+                <!--                        <groupId>org.junit.platform</groupId>-->
+                <!--                        <artifactId>junit-platform-surefire-provider</artifactId>-->
+                <!--                        <version>1.1.0</version>-->
+                <!--                    </dependency>-->
+                <!--                    <dependency>-->
+                <!--                        <groupId>org.junit.jupiter</groupId>-->
+                <!--                        <artifactId>junit-jupiter-engine</artifactId>-->
+                <!--                        <version>5.7.0</version>-->
+                <!--                    </dependency>-->
+                <!--                </dependencies>-->
+                <configuration>
+                    <excludes>
+                        <exclude>**/*ITest.java</exclude>
+                    </excludes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>integration-test</id>
+                        <goals>
+                            <goal>test</goal>
+                        </goals>
+                        <phase>integration-test</phase>
+                        <configuration>
+                            <excludes>
+                                <exclude>none</exclude>
+                            </excludes>
+                            <includes>
+                                <include>**/*ITest.java</include>
+                            </includes>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
