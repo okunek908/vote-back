@@ -18,18 +18,20 @@ micronaut:
 
   security:
 #    enabled: false
-
-
+    redirect:
+      unauthorized:
+#        url: '/login'
+        enabled: true
     basic-auth:
       enabled: true
     authentication: idtoken
 #    authentication: cookie
-    token:
-      jwt:
-        signatures:
-          secret:
-            generator:
-              secret: '"${JWT_GENERATOR_SIGNATURE_SECRET:Dv2dqx6dW0w21U9IFA7t0eOjkMB0bf6k}"'
+#    token:
+#      jwt:
+#        signatures:
+#          secret:
+#            generator:
+#              secret: '"${JWT_GENERATOR_SIGNATURE_SECRET:Dv2dqx6dW0w21U9IFA7t0eOjkMB0bf6k}"'
     oauth2:
       clients:
         github:
@@ -43,7 +45,8 @@ micronaut:
           token:
             url: 'https://github.com/login/oauth/access_token'
           auth-method: client-secret-post
-#        google:
+
+    #        google:
 #          client-id: 857066476501-khdp7f8snlte69tu62mgj2lbibg8j80i.apps.googleusercontent.com
 #          client-secret: XXy2i7yjRAopJMIU-YAZSeBI
 
@@ -52,6 +55,7 @@ micronaut:
       logout:
         get-allowed: true
     reject-not-found: false
+
 
 jackson:
   bean-introspection-module: true
