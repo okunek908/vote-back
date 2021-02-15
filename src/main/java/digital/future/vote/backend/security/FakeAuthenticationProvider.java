@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import org.reactivestreams.Publisher;
 
 // For testing purposes. TODO: Remove on prod!
-@Requires(env = Environment.TEST)
+//@Requires(env = Environment.TEST)
 @Singleton
 public class FakeAuthenticationProvider implements AuthenticationProvider  {
     @Override

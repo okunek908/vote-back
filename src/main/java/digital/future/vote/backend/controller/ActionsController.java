@@ -6,11 +6,14 @@ import digital.future.vote.backend.domain.StatusActions;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
 import io.micronaut.http.annotation.QueryValue;
+import io.micronaut.security.annotation.Secured;
+import io.micronaut.security.rules.SecurityRule;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller("actions")
+@Secured(SecurityRule.IS_ANONYMOUS) //TODO
 public class ActionsController {
 
     private List<StatusActions> statusActionsSet;
@@ -26,6 +29,6 @@ public class ActionsController {
     @Get
     public List<StatusActions.Action> getActionsByStatus(@QueryValue String status) {
         return statusActionsSet.stream().findFirst()
-                .filter(statusActions -> status.equals(statusActions.getStatus().name())).get().getActions();
+                .filter(statusActions -> status.equals(statusActions.getStatus().name())).orElseThrow().getActions();
     }
 }
