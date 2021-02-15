@@ -1,0 +1,84 @@
+# For a quick start check out our HTTP Requests collection (Tools|HTTP Client|Open HTTP Requests Collection).
+#
+# Following HTTP Request Live Templates are available:
+# * 'gtrp' and 'gtr' create a GET request with or without query parameters;
+# * 'ptr' and 'ptrp' create a POST request with a simple or parameter-like body;
+# * 'mptr' and 'fptr' create a POST request to submit a form with a text or file field (multipart/form-data);
+
+### Test 401
+
+GET http://localhost:8080/hello
+Accept: application/json
+Expect: 401
+
+### Test redirect if html accepted
+
+GET http://localhost:8080/hello
+Accept: text/html, application/json
+Expect: 303 -> / -> 200
+
+### Login via Basic Auth
+
+GET http://localhost:8080/hello
+Accept: application/json
+Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==
+
+
+
+
+### login and get JWT
+
+POST http://localhost:8080/login
+Accept: application/json
+Content-Type: application/json
+
+{
+  "username":"Aladdin", "password":"open sesame"
+}
+
+> {% client.global.set("auth_token", response.body.access_token); %}
+
+### Authorization by token, part 2. Use JWT token obtained at previous request to authorize.
+GET http://localhost:8080/hello
+Accept: application/json
+Authorization: Bearer {{auth_token}}
+
+
+
+
+###
+GET http://localhost:8080/poll
+Accept: application/json
+
+###
+POST http://localhost:8080/poll
+Content-Type: application/json
+
+{"title":"Miss Belarus", "description":"You are here to make your choice",
+  "timeStart":"2021-01-01T01:00:01Z",
+  "timeEnd":"2022-01-01T23:59:00Z",
+  "questions":[{"question":"Who do you prefer?", "options":["A", "B", "C"]}],
+  "participantList":{"id":"99", "title":"Dom36", "participants":["B1", "B2", "B3"]}}
+
+###
+
+GET http://localhost:8080/poll/id/1
+Accept: application/json
+
+###
+
+DELETE http://localhost:8080/poll/id/1
+
+###
+
+POST http://localhost:8080/vote
+Content-Type: application/json
+
+{"pollId":"77", "answers":[{"question":"0", "answer":"0"}]}
+
+###
+
+GET http://localhost:8080/vote/uid/V6upybbkRPv3pGpvXc4aoePxLcJWYp
+Accept: application/json
+###
+

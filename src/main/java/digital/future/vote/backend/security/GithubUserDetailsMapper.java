@@ -3,6 +3,7 @@ package digital.future.vote.backend.security;
 import io.micronaut.security.authentication.UserDetails;
 import io.micronaut.security.oauth2.endpoint.token.response.OauthUserDetailsMapper;
 import io.micronaut.security.oauth2.endpoint.token.response.TokenResponse;
+import io.reactivex.Flowable;
 import org.reactivestreams.Publisher;
 
 import javax.inject.Named;
@@ -23,9 +24,18 @@ public class GithubUserDetailsMapper implements OauthUserDetailsMapper {
 
     @Override
     public Publisher<UserDetails> createUserDetails(TokenResponse tokenResponse) {
-        return apiClient.getUser(TOKEN_PREFIX + tokenResponse.getAccessToken())
-                .map(user -> new UserDetails(user.getLogin(),
-                        Collections.singletonList(ROLE_GITHUB),
-                        Collections.singletonMap(OauthUserDetailsMapper.ACCESS_TOKEN_KEY, tokenResponse.getAccessToken())));
+        Flowable<User> userx = null;
+        try {
+            userx = apiClient.getUser(TOKEN_PREFIX + tokenResponse.getAccessToken());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Publisher<UserDetails> result = Flowable.just(new UserDetails(userx.blockingFirst().getLogin(),
+                Collections.singletonList(ROLE_GITHUB),
+                Collections.singletonMap(OauthUserDetailsMapper.ACCESS_TOKEN_KEY, tokenResponse.getAccessToken())));
+//        userx.map(user -> new UserDetails(user.getLogin(),
+//                Collections.singletonList(ROLE_GITHUB),
+//                Collections.singletonMap(OauthUserDetailsMapper.ACCESS_TOKEN_KEY, tokenResponse.getAccessToken())));
+        return result;
     }
 }

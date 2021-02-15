@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import javax.inject.Inject;
 
 import static io.micronaut.http.HttpRequest.GET;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @MicronautTest(transactional = false)
 public class HelloITest {
@@ -23,20 +24,26 @@ public class HelloITest {
     HttpClient client;
 
     @Test
-    void testRest()  {
-        HttpClientResponseException e = Assertions.assertThrows(HttpClientResponseException.class, ()-> {
-            HttpResponse<String> usersResponse = client.toBlocking()
-                    .exchange(GET("/hello").basicAuth("Aladdin", "open sesame!"));
-            System.out.println(usersResponse);
+    void testUnauth() {
+        HttpClientResponseException e = Assertions.assertThrows(HttpClientResponseException.class, () -> {
+            client.toBlocking()
+                    .exchange(GET("/hello"));
 
         });
-        Assertions.assertEquals(HttpStatus.UNAUTHORIZED, e.getStatus());
+        assertEquals(HttpStatus.UNAUTHORIZED, e.getStatus());
+    }
+
+    @Test
+    void testAuth() {
+        HttpResponse<String> usersResponse = client.toBlocking()
+                .exchange(GET("/hello").basicAuth("Aladdin", "open sesame"));
+        assertEquals(HttpStatus.OK, usersResponse.getStatus());
     }
 
 
     @Test
     void testHello() {
-        Assertions.assertEquals(controller.getRoot(), "Vote Backend");
+        assertEquals(controller.getRoot(), "Vote Backend");
     }
 
 

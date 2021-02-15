@@ -12,7 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
-@Filter("/**")
+//@Filter("/**")
 @Requires(env = Environment.TEST) // not used now, but maybe will do for tests
 @Requires(property = "spec.name", notEquals = "SecuritySpec")
 public class MockSecurityBypassFilter implements HttpClientFilter

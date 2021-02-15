@@ -7,10 +7,11 @@ import io.micronaut.security.rules.SecurityRule;
 
 import java.security.Principal;
 
-// For testing purposes
+// For testing purposes //TODO: remove on prod
 @Controller("/")
 public class HelloController {
     @Get("/hello")
+    @Secured(SecurityRule.IS_AUTHENTICATED)
     public String getHome(Principal principal) {
         return "Hello, " + principal.getName();
     }

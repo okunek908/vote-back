@@ -17,24 +17,18 @@ micronaut:
         url: "https://api.github.com"
 
   security:
-#    enabled: false
-    redirect:
-      unauthorized:
-#        url: '/login'
-        enabled: true
-    basic-auth:
-      enabled: true
     authentication: idtoken
-#    authentication: cookie
-#    token:
-#      jwt:
-#        signatures:
-#          secret:
-#            generator:
-#              secret: '"${JWT_GENERATOR_SIGNATURE_SECRET:Dv2dqx6dW0w21U9IFA7t0eOjkMB0bf6k}"'
+    token:
+      propagation.enabled: true
+      jwt:
+        signatures:
+          secret:
+            generator:
+              secret: 'Dv2dqx6dW0w21U9IFA7t0eOjkMB0bf6k' # 256bit entropy. Not necessarily base64 - any string will do.
     oauth2:
       clients:
         github:
+          grant-type: authorization-code
           client-id: e02a6af391ffc5a454da
           client-secret: d886b6e471ac63dfb1316eb884a759e4449c9025
           scopes:
@@ -44,12 +38,14 @@ micronaut:
             url: 'https://github.com/login/oauth/authorize'
           token:
             url: 'https://github.com/login/oauth/access_token'
+          redirect-uri: http://localhost:8080/oauth/callback/githubv3
+
           auth-method: client-secret-post
 
-    #        google:
-#          client-id: 857066476501-khdp7f8snlte69tu62mgj2lbibg8j80i.apps.googleusercontent.com
-#          client-secret: XXy2i7yjRAopJMIU-YAZSeBI
-
+        google:
+          enabled: false
+          client-id: 857066476501-khdp7f8snlte69tu62mgj2lbibg8j80i.apps.googleusercontent.com
+          client-secret: XXy2i7yjRAopJMIU-YAZSeBI
 
     endpoints:
       logout:
@@ -100,3 +96,7 @@ logger:
       micronaut:
         security:
           authentication: DEBUG
+          oauth2: TRACE
+        http:
+          server:
+            netty: DEBUG
