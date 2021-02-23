@@ -92,6 +92,11 @@
             <artifactId>logback-classic</artifactId>
             <scope>runtime</scope>
         </dependency>
+        <dependency>
+            <groupId>com.google.oauth-client</groupId>
+            <artifactId>google-oauth-client</artifactId>
+            <version>1.31.4</version>
+        </dependency>
 
         <!-- ================== -->
         <!--  DATABASE RELATED  -->

@@ -17,7 +17,7 @@ micronaut:
         url: "https://api.github.com"
 
   security:
-    authentication: idtoken
+    authentication: cookie
     token:
       propagation.enabled: true
       jwt:
@@ -27,8 +27,28 @@ micronaut:
               secret: 'Dv2dqx6dW0w21U9IFA7t0eOjkMB0bf6k' # 256bit entropy. Not necessarily base64 - any string will do.
     oauth2:
       clients:
+        microsoft:
+          enabled: false
+          grant-type: authorization_code
+          client-id: 28b292b8-b5fd-41be-8b1b-dda96485fb78
+          client-secret: 25fda8b2-1ede-42c6-82ea-0ff5dbb000c6
+          redirect-uri: 'http://localhost:8080/oauth/callback/microsoft'
+          scopes:
+            - 'User.Read'
+          authorization:
+            url: 'https://login.microsoftonline.com/common/oauth2/v2.0/authorize'
+          token:
+            url: 'https://login.microsoftonline.com/common/oauth2/v2.0/token'
+            auth-method: client_secret_basic
+          client-credentials:
+
+
+
+
+
+
         github:
-          grant-type: authorization-code
+          grant-type: authorization_code
           client-id: e02a6af391ffc5a454da
           client-secret: d886b6e471ac63dfb1316eb884a759e4449c9025
           scopes:
@@ -38,9 +58,10 @@ micronaut:
             url: 'https://github.com/login/oauth/authorize'
           token:
             url: 'https://github.com/login/oauth/access_token'
+            auth-method: client_secret_post
           redirect-uri: http://localhost:8080/oauth/callback/githubv3
 
-          auth-method: client-secret-post
+
 
         google:
           enabled: false
